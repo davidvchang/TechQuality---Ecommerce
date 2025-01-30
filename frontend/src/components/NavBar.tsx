@@ -8,10 +8,10 @@ const NavBar:React.FC = () => {
         <h1 className='font-semibold text-2xl'>Tech<span className='text-blue-500'>Quality</span></h1>
 
         <div className='flex gap-10'>
-            <Nav link='' text='Home'/>
-            <Nav link='' text='Products'/>
-            <Nav link='' text='About'/>
-            <Nav link='' text='Contact Us'/>
+            <Nav link='/' text='Home'/>
+            <Nav link='/products' text='Products'/>
+            <Nav link='/about' text='About'/>
+            <Nav link='/contact' text='Contact Us'/>
         </div>
 
         <div className='flex gap-5'>
