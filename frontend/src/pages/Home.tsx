@@ -1,8 +1,10 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
-import PresentationIMG from '../assets/img/pexels-pixabay-39559.webp'
+import PresentationIMG from '../assets/img/Portada.webp'
 import { ArrowRight, Truck, Shield, Clock, CreditCard } from 'lucide-react';
 import Feature from '../components/Feature';
+import AlexaImg from '../assets/img/Alexa.webp'
+import CategoryHome from '../components/CategoryHome';
 
 const Home:React.FC = () => {
   return (
@@ -27,6 +29,16 @@ const Home:React.FC = () => {
           <Feature icon={<Shield className='w-8 h-8'/>} title='6-Months Warranty' description='On all products'/>
           <Feature icon={<Clock className='w-8 h-8'/>} title='30-Day Returns' description='Hassle-free returns'/>
           <Feature icon={<CreditCard className='w-8 h-8'/>} title='Secure Payment' description='256-bit encryption'/>
+        </div>
+
+        <div className='flex flex-col w-full items-center p-10 gap-10'>
+          <span className='text-2xl'>Categories</span>
+
+          <div className='flex flex-wrap w-full gap-10'>
+            <CategoryHome image={AlexaImg} title_category='Smart Gadgets & Accessories' description_category='Discover all our smart accessories'/>
+            <CategoryHome image={AlexaImg} title_category='Smart Gadgets & Accessories' description_category='Discover all our smart accessories'/>
+            <CategoryHome image={AlexaImg} title_category='Smart Gadgets & Accessories' description_category='Discover all our smart accessories'/>
+          </div>
         </div>
     </section>
   )
