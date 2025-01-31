@@ -22,7 +22,7 @@ const Home:React.FC = () => {
           </div>
         </div>
 
-        <div className='flex flex-wrap w-full justify-between'>
+        <div className='flex flex-wrap w-full justify-between bg-slate-50 px-5'>
           <Feature icon={<Truck className='w-8 h-8'/>} title='Free Premium Shipping' description='On orders over $300'/>
           <Feature icon={<Shield className='w-8 h-8'/>} title='6-Months Warranty' description='On all products'/>
           <Feature icon={<Clock className='w-8 h-8'/>} title='30-Day Returns' description='Hassle-free returns'/>
