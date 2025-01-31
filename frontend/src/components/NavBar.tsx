@@ -4,7 +4,7 @@ import Nav from './Nav';
 
 const NavBar:React.FC = () => {
   return (
-    <div className='h-16 w-full flex items-center justify-between px-5 border-b border-b-slate-200 shadow'>
+    <div className='h-16 w-full flex items-center justify-between px-5 bg-white border-b border-b-slate-200 shadow fixed z-10'>
         <h1 className='font-semibold text-2xl'>Tech<span className='text-blue-500'>Quality</span></h1>
 
         <div className='flex gap-10'>
