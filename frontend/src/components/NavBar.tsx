@@ -22,7 +22,7 @@ const NavBar:React.FC<PropsNavBar> = ({numberCart}) => {
             <button className='w-8 h-8 hover:text-blue-500 hover:transition duration-300 hover:cursor-pointer'><User/></button>
             <div className='flex'>
               <button className='w-7 h-8 hover:text-blue-500 hover:transition duration-300 hover:cursor-pointer'><ShoppingCart/></button>
-              <div className=' bg-blue-500 px-1 py-0 w-fit h-fit rounded-full flex items-center'>
+              <div className=' bg-blue-500 px-1 py-0 w-fit h-fit rounded-full flex items-center select-none'>
                 <span className='text-xs font-bold text-white'>{numberCart}</span>
               </div>
 
