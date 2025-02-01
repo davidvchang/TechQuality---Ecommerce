@@ -9,7 +9,7 @@ import CategoryHome from '../components/CategoryHome';
 const Home:React.FC = () => {
   return (
     <section>
-        <NavBar/>
+        <NavBar numberCart={2}/>
 
         <div className='w-full h-full'>
           <img src={PresentationIMG} alt="" className='h-screen w-full brightness-40 relative'/>
