@@ -40,6 +40,10 @@ const Home:React.FC = () => {
             <CategoryHome image={AlexaImg} title_category='Smart Gadgets & Accessories' description_category='Discover all our smart accessories'/>
           </div>
         </div>
+
+        <div className='w-full flex justify-center pb-10'>
+          <a href="" className='w-fit px-8 py-3  text-center border-2 hover:bg-blue-500 hover:text-white hover:transition-colors duration-300'>All Categories</a>
+        </div>
     </section>
   )
 }
