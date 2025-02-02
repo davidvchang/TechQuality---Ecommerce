@@ -5,6 +5,7 @@ import { ArrowRight, Truck, Shield, Clock, CreditCard } from 'lucide-react';
 import Feature from '../components/Feature';
 import AlexaImg from '../assets/img/Alexa.webp'
 import CategoryHome from '../components/CategoryHome';
+import ProductHome from '../components/ProductHome';
 
 const Home:React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const Home:React.FC = () => {
           <Feature icon={<CreditCard className='w-8 h-8'/>} title='Secure Payment' description='256-bit encryption'/>
         </div>
 
+
         <div className='flex flex-col w-full items-center p-10 gap-10'>
           <span className='text-2xl'>Categories</span>
 
@@ -39,11 +41,29 @@ const Home:React.FC = () => {
             <CategoryHome image={AlexaImg} title_category='Smart Gadgets & Accessories' description_category='Discover all our smart accessories'/>
             <CategoryHome image={AlexaImg} title_category='Smart Gadgets & Accessories' description_category='Discover all our smart accessories'/>
           </div>
+
+          <div className='w-full flex justify-center pb-10'>
+            <a href="" className='w-fit px-8 py-3  text-center border-2 hover:bg-blue-500 hover:text-white hover:transition-colors duration-300 hover:border-blue-500'>All Categories</a>
+          </div>
         </div>
 
-        <div className='w-full flex justify-center pb-10'>
-          <a href="" className='w-fit px-8 py-3  text-center border-2 hover:bg-blue-500 hover:text-white hover:transition-colors duration-300 hover:border-blue-500'>All Categories</a>
+
+        <div className='flex flex-col w-full items-center p-10 gap-10 bg-slate-50'>
+          <span className='text-2xl'>Last Products</span>
+
+          <div className='flex flex-wrap w-full gap-10'>
+            <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+            <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+            <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+            <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+          </div>
+
+          <div className='w-full flex justify-center pb-10'>
+            <a href="" className='w-fit px-8 py-3  text-center border-2 hover:bg-blue-500 hover:text-white hover:transition-colors duration-300 hover:border-blue-500'>More Products</a>
+          </div>
         </div>
+
+
     </section>
   )
 }
