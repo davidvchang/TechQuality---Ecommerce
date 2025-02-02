@@ -42,7 +42,7 @@ const Home:React.FC = () => {
         </div>
 
         <div className='w-full flex justify-center pb-10'>
-          <a href="" className='w-fit px-8 py-3  text-center border-2 hover:bg-blue-500 hover:text-white hover:transition-colors duration-300'>All Categories</a>
+          <a href="" className='w-fit px-8 py-3  text-center border-2 hover:bg-blue-500 hover:text-white hover:transition-colors duration-300 hover:border-blue-500'>All Categories</a>
         </div>
     </section>
   )
