@@ -6,6 +6,7 @@ import Feature from '../components/Feature';
 import AlexaImg from '../assets/img/Alexa.webp'
 import CategoryHome from '../components/CategoryHome';
 import ProductHome from '../components/ProductHome';
+import Subscribe from '../components/Subscribe';
 
 const Home:React.FC = () => {
   return (
@@ -62,6 +63,12 @@ const Home:React.FC = () => {
             <a href="" className='w-fit px-8 py-3  text-center border-2 hover:bg-blue-500 hover:text-white hover:transition-colors duration-300 hover:border-blue-500'>More Products</a>
           </div>
         </div>
+
+
+        <div className='w-full h-[22rem] flex flex-col bg-[#101827] justify-center'>
+          <Subscribe/>
+        </div>
+
     </section>
   )
 }
