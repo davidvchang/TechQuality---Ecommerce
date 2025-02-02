@@ -6,7 +6,6 @@ import Feature from '../components/Feature';
 import AlexaImg from '../assets/img/Alexa.webp'
 import CategoryHome from '../components/CategoryHome';
 import ProductHome from '../components/ProductHome';
-import Footer from '../components/Footer';
 
 const Home:React.FC = () => {
   return (
