@@ -1,11 +1,11 @@
 import React from 'react'
-import { Instagram, Facebook } from 'lucide-react';
+import { Instagram, Facebook, MapPin, Phone, Mail } from 'lucide-react';
 import IconFooter from './IconFooter';
 
 const Footer:React.FC = () => {
   return (
     <div className='flex flex-col w-full'>
-        <div className='flex pb-10'>
+        <div className='flex justify-between pb-10'>
             <div className='flex flex-col max-w-72 gap-5'>
                 <span className='font-medium text-lg'>About Tech<span className='text-blue-500'>Quality</span></span>
                 <p className='text-slate-600 font-light'>We handle the best quality and the best prices, we offer high quality and long lasting products, we have a great variety of products that you will like.</p>
@@ -14,6 +14,25 @@ const Footer:React.FC = () => {
                     <IconFooter link='#' icon={<Facebook className='w-5 h-5 text-slate-400 hover:text-slate-600 hover:transition duration-300'/>}/>
                     <IconFooter link='#' icon={<Instagram className='w-5 h-5 text-slate-400 hover:text-slate-600 hover:transition duration-300'/>}/>
 
+                </div>
+            </div>
+
+            <div className='flex flex-col max-w-72 gap-5'>
+                <span className='font-medium text-lg'>Contact Us</span>
+
+                <div className='flex gap-2 items-center'>
+                    <MapPin className='w-5 h-5 text-slate-400'/>
+                    <span className='text-slate-600 font-light'>123 Fashion Street, Milan, Italy.</span>
+                </div>
+
+                <div className='flex gap-2'>
+                    <Phone className='w-5 h-5 text-slate-400'/>
+                    <span className='text-slate-600 font-light'>+1 (555) 123-4567</span>
+                </div>
+
+                <div className='flex gap-2'>
+                    <Mail className='w-5 h-5 text-slate-400'/>
+                    <span className='text-slate-600 font-light'>support@techquality.com</span>
                 </div>
             </div>
 
