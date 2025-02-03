@@ -1,5 +1,4 @@
 import React from 'react'
-import NavBar from '../components/NavBar'
 import PresentationIMG from '../assets/img/Portada.webp'
 import { ArrowRight, Truck, Shield, Clock, CreditCard } from 'lucide-react';
 import Feature from '../components/Feature';
@@ -11,10 +10,9 @@ import Subscribe from '../components/Subscribe';
 const Home:React.FC = () => {
   return (
     <section>
-        <NavBar numberCart={2}/>
 
         <div className='w-full h-full'>
-          <img src={PresentationIMG} alt="" className='h-screen w-full brightness-40 relative'/>
+          <img src={PresentationIMG} alt="" className='w-full brightness-40 relative object-cover ' style={{height: "calc(100vh - 64px)"}}/>
 
           <div className='absolute flex flex-col gap-5 items-center top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]'>
             <span className='text-white text-6xl font-medium'>Technological Quality</span>
