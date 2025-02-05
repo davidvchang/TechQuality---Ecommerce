@@ -24,7 +24,7 @@ const Cart:React.FC = () => {
             <div className='w-full flex flex-col justify-between gap-1'>
 
                 {/* CONTAINER PRODUCT */}
-                <div className='flex justify-between bg-white p-5 rounded-lg border shadow w-full h-fit border-slate-100'>
+                <div className='flex justify-between bg-white p-5 rounded-lg border w-full h-fit border-slate-100'>
 
                     <div className='flex items-center gap-5'>
                         <div className='bg-red-400 min-w-24 min-h-24 max-h-24 overflow-hidden rounded'>
@@ -58,7 +58,7 @@ const Cart:React.FC = () => {
             </div>
 
             {/* ORDER SUMMARY */}
-            <div className='p-5 gap-5 min-w-96 w-[42rem] h-fit flex flex-col bg-white rounded-lg border border-slate-100 shadow'>
+            <div className='p-5 gap-5 min-w-96 w-[42rem] h-fit flex flex-col bg-white rounded-lg border border-slate-100'>
                 <span className='font-medium text-lg'>Order Summary</span>
 
                 <div className='flex flex-col gap-2 pb-5 border-b border-b-slate-200'>
