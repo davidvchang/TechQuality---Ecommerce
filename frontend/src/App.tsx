@@ -1,6 +1,7 @@
 import Footer from "./components/Footer"
 import NavBar from "./components/NavBar";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import Home from "./pages/Home"
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ function App() {
             
               <Route path="/" element={<Home/>}/>
               <Route path="/cart" element={<Cart/>}/>
+              <Route path="/checkout" element={<Checkout/>}/>
           </Routes>
         </BrowserRouter>
       </div>

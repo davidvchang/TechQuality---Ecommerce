@@ -78,7 +78,7 @@ const Cart:React.FC = () => {
                     <span className='font-medium text-lg'>$799.99</span>
                 </div>
 
-                <a href="" className='w-full py-4 bg-blue-600 text-white font-medium flex justify-center hover:bg-blue-500 hover:transition duration-300'>Proceed to Checkout</a>
+                <a href="/checkout" className='w-full py-4 bg-blue-600 text-white font-medium flex justify-center hover:bg-blue-500 hover:transition duration-300'>Proceed to Checkout</a>
 
             </div>
 
