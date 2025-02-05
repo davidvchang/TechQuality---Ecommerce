@@ -5,6 +5,7 @@ import Checkout from "./pages/Checkout";
 import Home from "./pages/Home"
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Review from "./pages/Review";
+import PaymentAccepted from "./pages/PaymentAccepted";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
               <Route path="/cart" element={<Cart/>}/>
               <Route path="/checkout" element={<Checkout/>}/>
               <Route path="/order-review" element={<Review/>}/>
+              <Route path="/payment-accepted" element={<PaymentAccepted/>}/>
           </Routes>
         </BrowserRouter>
       </div>

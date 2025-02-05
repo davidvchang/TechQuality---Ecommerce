@@ -97,7 +97,7 @@ const Review:React.FC = () => {
         </div>
 
         <div className='flex flex-col gap-5'>
-            <a href="" className='gap-2 min-w-96 w-[44rem] py-4 bg-blue-600 text-white font-medium flex justify-center items-center hover:bg-blue-500 hover:transition duration-300'><CircleCheckBig className='w-5 h-5 '/> Confirm Order</a>
+            <a href="/payment-accepted" className='gap-2 min-w-96 w-[44rem] py-4 bg-blue-600 text-white font-medium flex justify-center items-center hover:bg-blue-500 hover:transition duration-300'><CircleCheckBig className='w-5 h-5 '/> Confirm Order</a>
             <a href="" className='gap-2 min-w-96 w-[44rem] py-4 bg-white border border-slate-300 font-medium flex justify-center items-center hover:brightness-95 hover:transition duration-300'>Edit Order</a>
 
         </div>
