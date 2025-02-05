@@ -3,6 +3,17 @@ import { Minus, Plus, Trash2 } from 'lucide-react';
 
 const Cart:React.FC = () => {
 
+    const [numberQuantity, setNumberQuantity] = useState<number>(1)
+
+    const restQuantity = () => {
+        if(numberQuantity < 1) {
+            setNumberQuantity(1)
+        }
+        else if(numberQuantity > 0){
+            setNumberQuantity(numberQuantity - 1)
+        }
+    }
+
   return (  
     <section className='flex flex-col p-10 gap-5 bg-slate-50'>
         <span className='text-2xl'>Your Shopping Cart</span>
@@ -28,9 +39,9 @@ const Cart:React.FC = () => {
                             </div>
 
                             <div className='flex border w-fit border-slate-200 rounded gap-2 px-1 items-center'>
-                                <button className='w-fit h-fit p-2 hover:bg-slate-50 cursor-pointer hover:transition duration-300'><Minus className='w-4 h-4'/></button>
-                                <span className='py-2 px-1'>{1}</span>
-                                <button className='w-fit h-fit p-2 hover:bg-slate-50 cursor-pointer hover:transition duration-300'><Plus className='w-4 h-4'/></button>
+                                <button className='w-fit h-fit p-2 hover:bg-slate-50 cursor-pointer hover:transition duration-300' onClick={restQuantity}><Minus className='w-4 h-4'/></button>
+                                <span className='py-2 px-1'>{numberQuantity}</span>
+                                <button className='w-fit h-fit p-2 hover:bg-slate-50 cursor-pointer hover:transition duration-300' onClick={() => setNumberQuantity(numberQuantity + 1)}><Plus className='w-4 h-4'/></button>
                             </div>
                         </div>
 
