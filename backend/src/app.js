@@ -9,6 +9,6 @@ app.set("Port", process.env.PORT || 4000)
 app.use(morgan("dev"))
 app.use(express.json())
 
-app.use("/products", productsRoutes)
+app.use("/api/products", productsRoutes)
 
 export default app
