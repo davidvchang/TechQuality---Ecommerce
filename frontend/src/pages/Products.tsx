@@ -1,5 +1,6 @@
 import React from 'react'
 import InputSearch from '../components/InputSearch'
+import InputCategory from '../components/InputCategory'
 
 const Products:React.FC = () => {
   return (
@@ -11,7 +12,16 @@ const Products:React.FC = () => {
 
         <div className='pt-10 px-20'>
             <InputSearch/>
+        </div>
 
+        <div className='pt-8 px-20 flex flex-col gap-4'>
+            <span className='text-lg font-medium'>Categories</span>
+
+            <div className='flex flex-col gap-3'>
+                <InputCategory id_name='Hola' name='All'/>
+                <InputCategory id_name='asd' name='Bags'/>
+                <InputCategory id_name='dsa' name='Hola'/>
+            </div>
         </div>
 
       
