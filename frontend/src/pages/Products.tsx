@@ -37,9 +37,21 @@ const Products:React.FC = () => {
             <span className='text-slate-300'>Discover our wide variety of high quality products.</span>
         </div>
 
-        <div className='pt-10 px-20'>
-            <InputSearch/>
+        <div className='w-full flex justify-between'>
+            <div className='pt-10 px-20'>
+                <InputSearch/>
+            </div>
+
+            <div className='flex flex-col gap-3 pt-10 px-16'>
+                <select name="sort" className='w-fit px-2 py-2 text-sm font-light border border-slate-500 rounded'>
+                    <option value="newest" selected>Newest</option>
+                    <option value="low_to_high">Price: Low to High</option>
+                    <option value="high_to_low">Price: High to Low</option>
+                </select>
+            </div>
+
         </div>
+
 
         <div className='flex gap-20'>
             <div className='flex flex-col'>
@@ -77,19 +89,6 @@ const Products:React.FC = () => {
                             </div>
                     </div>
                 </div>
-
-                <div className='pt-8 px-20 flex flex-col gap-4'>
-                    <span className='text-lg font-medium'>Sort by</span>
-
-                    <div className='flex flex-col gap-3'>
-                        <select name="sort" className='w-fit px-2 py-2 text-sm font-light border border-slate-300 rounded'>
-                            <option value="newest" selected>Newest</option>
-                            <option value="low_to_high">Price: Low to High</option>
-                            <option value="high_to_low">Price: High to Low</option>
-                        </select>
-                    </div>
-                </div>
-
             </div>
 
             {/* PRODUCTS CONTAINER */}
