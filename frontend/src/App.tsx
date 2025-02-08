@@ -6,6 +6,7 @@ import Home from "./pages/Home"
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import Review from "./pages/Review";
 import PaymentAccepted from "./pages/PaymentAccepted";
+import Products from "./pages/Products";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             
               <Route path="/" element={<Home/>}/>
+              <Route path="/products" element={<Products/>}/>
               <Route path="/cart" element={<Cart/>}/>
               <Route path="/checkout" element={<Checkout/>}/>
               <Route path="/order-review" element={<Review/>}/>
