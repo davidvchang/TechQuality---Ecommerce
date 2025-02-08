@@ -4,7 +4,7 @@ import { ArrowRight, Truck, Shield, Clock, CreditCard } from 'lucide-react';
 import Feature from '../components/Feature';
 import AlexaImg from '../assets/img/Alexa.webp'
 import CategoryHome from '../components/CategoryHome';
-import ProductHome from '../components/ProductHome';
+import ProductHome from '../components/Product';
 import Subscribe from '../components/Subscribe';
 
 const Home:React.FC = () => {
