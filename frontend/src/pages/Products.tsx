@@ -1,4 +1,5 @@
 import React from 'react'
+import InputSearch from '../components/InputSearch'
 
 const Products:React.FC = () => {
   return (
@@ -7,6 +8,12 @@ const Products:React.FC = () => {
             <span className='text-white text-4xl font-light'>Products Collection</span>
             <span className='text-slate-300'>Discover our wide variety of high quality products.</span>
         </div>
+
+        <div className='pt-10 px-20'>
+            <InputSearch/>
+
+        </div>
+
       
     </section>
   )
