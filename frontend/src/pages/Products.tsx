@@ -16,10 +16,12 @@ interface PropsDataCategories {
 const Products:React.FC = () => {
 
     const [categories, setCategories] = useState<PropsDataCategories[]>([])
+    const [numberProducts, setNumberProducts] = useState<number>(0)
 
     const getCategories= async() => {
         const response = await axios.get("http://localhost:4000/api/products")
         setCategories(response.data)
+        setNumberProducts(response.data.length)
     }
 
     useEffect(() => {
@@ -92,14 +94,18 @@ const Products:React.FC = () => {
             </div>
 
             {/* PRODUCTS CONTAINER */}
-            <div className='grid grid-cols-3 w-full gap-x-0 gap-y-10 pt-10'>
-                <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+            <div className='flex flex-col pt-8 gap-3 w-full'>
+                <span className='tex-sm font-light'>Showing {numberProducts} products</span>
+
+                <div className='grid grid-cols-3 w-full gap-x-0 gap-y-10'>
+                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+                </div>
             </div>
 
         </div>
