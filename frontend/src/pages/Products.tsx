@@ -15,18 +15,20 @@ interface PropsDataCategories {
 
 const Products:React.FC = () => {
 
+    const [products, setProducts] = useState<PropsDataCategories[]>([])
     const [categories, setCategories] = useState<PropsDataCategories[]>([])
     const [numberProducts, setNumberProducts] = useState<number>(0)
 
-    const getCategories= async() => {
+    const getProducts= async() => {
         const response = await axios.get("http://localhost:4000/api/products")
         setCategories(response.data)
         setNumberProducts(response.data.length)
+        setProducts(response.data)
     }
 
     useEffect(() => {
-        getCategories()
-    })
+        getProducts()
+    }, [])
 
     const uniqueCategories = categories.filter((item, index, self) =>
         index === self.findIndex(c => c.category === item.category)
@@ -98,13 +100,9 @@ const Products:React.FC = () => {
                 <span className='tex-sm font-light'>Showing {numberProducts} products</span>
 
                 <div className='grid grid-cols-3 w-full gap-x-0 gap-y-10'>
-                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
-                    <ProductHome image={AlexaImg} name_product='Alexa' type='Smart' price={799.99}/>
+                    {products.map((product) => (
+                        <ProductHome key={product.id_product} link={`/product/${product.id_product}`} image={AlexaImg} name_product={product.name} type={product.category} price={product.price}/>
+                    ))}
                 </div>
             </div>
 

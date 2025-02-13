@@ -5,14 +5,17 @@ interface PropsProductsHome {
     image: string,
     name_product: string,
     type: string,
-    price: number
+    price: string,
+    link: string
 }
 
-const ProductHome:React.FC<PropsProductsHome> = ({ image, name_product, type, price}) => {
+const ProductHome:React.FC<PropsProductsHome> = ({ image, name_product, type, price, link}) => {
   return (
     <div className='flex-1 flex-col'>
         <div className='min-w-72 w-72 h-72 relative overflow-hidden'>
-            <img src={image} alt="" className='w-full h-full object-cover brightness-90 hover:scale-105 hover:transition duration-300 hover:cursor-pointer'/>
+            <a href={link}>
+                <img src={image} alt="" className='w-full h-full object-cover brightness-90 hover:scale-105 hover:transition duration-300 hover:cursor-pointer'/>
+            </a>
 
             <div className='absolute top-3 right-3 flex flex-col gap-2'>
                 <button className='p-2 bg-white rounded-full shadow-2xl opacity-95 hover:brightness-95 hover:transition hover:cursor-pointer duration-300'>
