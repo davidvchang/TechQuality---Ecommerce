@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { ArrowLeft, Minus, Plus } from 'lucide-react';
+import { ArrowLeft, Minus, Plus, ShoppingCart, Heart } from 'lucide-react';
 import ImagesProductContainer from '../components/ImagesProductContainer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -77,7 +77,16 @@ const ProductView:React.FC = () => {
                         </div>
                     </div>
 
+                    <div className='flex gap-5'>
+                        <button className='bg-[#101827] text-white flex py-3 px-48 gap-3 items-center hover:bg-slate-800 cursor-pointer hover:transition duration-300'>
+                            <ShoppingCart className='w-5 h-5'/>
+                            <span className='font-normal'>Add to Cart</span>
+                        </button>
 
+                        <button className='border border-slate-300 p-3 rounded-full w-fit h-fit hover:bg-slate-100 hover:transition duration-300 cursor-pointer'>
+                            <Heart className='w-5 h-5'/>
+                        </button>
+                    </div>
                 </div>
             ))}
         </div>
