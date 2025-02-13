@@ -32,3 +32,17 @@ export const deleteProduct = async (req, res) => {
         res.status(500).json({message: "Ha ocurrido un error:" + ex})
     }
 }
+
+export const getOneProduct = async (req, res) => {
+    const {id_product} = req.params
+
+    try {
+        const existProduct = await pool.query("SELECT COUNT(*) FROM products WHERE id_product = $1", [id_product])
+        if(existProduct.rows[0].count > 0) {
+            const product = await pool.query("SELECT * FROM products WHERE id_product = $1", [id_product])
+            res.status(200).json(product.rows)
+        }
+    } catch (ex) {
+        res.status(500).json({message: "Ha ocurrido un error:" + ex})
+    }
+}
