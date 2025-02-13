@@ -35,7 +35,7 @@ const ProductView:React.FC = () => {
     }, [])
     
   return (
-    <section className='w-full h-full bg-slate-50 pb-14 p-10 flex flex-col'>
+    <section className='w-full h-full bg-slate-50 pb-14 p-10 flex flex-col gap-5'>
         <a href="/products" className='flex gap-2 items-center hover:text-slate-600 hover:transition duration-300'>
             <ArrowLeft className='w-[22px] h-[22px]'/>
             <span>Back to products</span>
@@ -77,16 +77,27 @@ const ProductView:React.FC = () => {
                         </div>
                     </div>
 
-                    <div className='flex gap-5'>
-                        <button className='bg-[#101827] text-white flex py-3 px-48 gap-3 items-center hover:bg-slate-800 cursor-pointer hover:transition duration-300'>
-                            <ShoppingCart className='w-5 h-5'/>
-                            <span className='font-normal'>Add to Cart</span>
-                        </button>
+                    <div className='flex flex-col gap-14 pt-5'>
+                        <div className='flex gap-5'>
+                            <button className='bg-[#101827] text-white flex py-3 px-48 gap-3 items-center hover:bg-slate-800 cursor-pointer hover:transition duration-300'>
+                                <ShoppingCart className='w-5 h-5'/>
+                                <span className='font-normal'>Add to Cart</span>
+                            </button>
 
-                        <button className='border border-slate-300 p-3 rounded-full w-fit h-fit hover:bg-slate-100 hover:transition duration-300 cursor-pointer'>
-                            <Heart className='w-5 h-5'/>
-                        </button>
+                            <button className='border border-slate-300 p-3 rounded-full w-fit h-fit hover:bg-slate-100 hover:transition duration-300 cursor-pointer'>
+                                <Heart className='w-5 h-5'/>
+                            </button>
+                        </div>
+
+                        <div className='flex flex-col gap-2'>
+                            <span className='font-medium'>Description</span>
+
+                            <div className='flex items-center w-[36rem]'>
+                                <p className='font-light'>{product.description}</p>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             ))}
         </div>
