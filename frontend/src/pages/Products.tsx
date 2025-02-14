@@ -4,6 +4,7 @@ import InputCategory from '../components/InputCategory'
 import axios from 'axios'
 import ProductHome from '../components/Product'
 import AlexaImg from '../assets/img/Alexa.webp'
+import { Search } from 'lucide-react';
 
 interface PropsDataCategories {
     id_product: number,
@@ -21,6 +22,8 @@ const Products:React.FC = () => {
     const [filteredProducts, setFilteredProducts] = useState<PropsDataCategories[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [numberProductsCategory, setNumberProductsCategory] = useState<number>(0)
+    const [minPrice, setMinPrice] = useState<string>("")
+    const [maxPrice, setMaxPrice] = useState<string>("")
 
     const getProducts= async() => {
         const response = await axios.get("http://localhost:4000/api/products")
@@ -62,6 +65,13 @@ const Products:React.FC = () => {
         }
         else if(id_name === "overr_1000"){
             const filtered = products.filter((product) => Number(product.price) > 1000)
+            setFilteredProducts(filtered);
+        }
+    }
+
+    const handlePricesInputs = () => {
+        if(minPrice !== "" && maxPrice !== "" && Number(minPrice) < Number(maxPrice)) {
+            const filtered = products.filter((product) => Number(product.price) >= Number(minPrice) && Number(product.price) <= Number(maxPrice))
             setFilteredProducts(filtered);
         }
     }
@@ -128,9 +138,10 @@ const Products:React.FC = () => {
                                 </div>
 
                                 <div className='flex gap-2'>
-                                    <input type="number" className='w-16 border border-slate-300 rounded pl-3 py-1 text-sm' min={0}/>
+                                    <input type="number" className='w-16 border border-slate-300 rounded pl-3 py-1 text-sm' min={0} onChange={(e) => setMinPrice(e.target.value)}/>
                                     <span className='text-xl font-semibold'>-</span>
-                                    <input type="number" className='w-16 border border-slate-300 rounded pl-3 py-1 text-sm' min={0}/>
+                                    <input type="number" className='w-16 border border-slate-300 rounded pl-3 py-1 text-sm' min={0} onChange={(e) => setMaxPrice(e.target.value)}/>
+                                    <button className='border border-slate-300 rounded p-2 cursor-pointer hover:bg-slate-100 hover:transition duration-300' onClick={handlePricesInputs}> <Search className='w-4 h-4'/></button>
                                 </div>
                             </div>
                     </div>
