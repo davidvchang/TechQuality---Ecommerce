@@ -8,6 +8,7 @@ import Review from "./pages/Review";
 import PaymentAccepted from "./pages/PaymentAccepted";
 import Products from "./pages/Products";
 import ProductView from "./pages/ProductView";
+import Login from "./pages/Login";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             
               <Route path="/" element={<Home/>}/>
+              <Route path="/login" element={<Login/>}/>
               <Route path="/products" element={<Products/>}/>
               <Route path="/product/:id_product" element={<ProductView/>}/>
               <Route path="/cart" element={<Cart/>}/>
