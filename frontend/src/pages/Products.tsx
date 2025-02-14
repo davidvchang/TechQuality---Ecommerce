@@ -18,12 +18,28 @@ const Products:React.FC = () => {
     const [products, setProducts] = useState<PropsDataCategories[]>([])
     const [categories, setCategories] = useState<PropsDataCategories[]>([])
     const [numberProducts, setNumberProducts] = useState<number>(0)
+    const [filteredProducts, setFilteredProducts] = useState<PropsDataCategories[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [numberProductsCategory, setNumberProductsCategory] = useState<number>(0)
 
     const getProducts= async() => {
         const response = await axios.get("http://localhost:4000/api/products")
         setCategories(response.data)
         setNumberProducts(response.data.length)
         setProducts(response.data)
+        setFilteredProducts(response.data)
+    }
+
+    const handleCategorySelected = (category: string) => {
+        setSelectedCategory(category);
+        if (category === "all") {
+            setFilteredProducts(products);
+            setNumberProductsCategory(numberProducts)
+        } else {
+            const filtered = products.filter((product) => product.category === category);
+            setFilteredProducts(filtered);
+            setNumberProductsCategory(filtered.length)
+        }
     }
 
     useEffect(() => {
@@ -63,8 +79,10 @@ const Products:React.FC = () => {
                     <span className='text-lg font-medium'>Categories</span>
 
                     <div className='flex flex-col gap-3'>
+                        <InputCategory name_input='categories' name='all' id_name='all' onChange={() => handleCategorySelected("all")}/>
+                        
                         {uniqueCategories.map((c) => (
-                            <InputCategory name_input='categories' id_name={c.name} key={c.id_product} name={c.category}/>
+                            <InputCategory name_input='categories' id_name={c.name} key={c.id_product} name={c.category} onChange={() => handleCategorySelected(c.category)}/>
                         ))}
                     </div>
                 </div>
@@ -97,10 +115,10 @@ const Products:React.FC = () => {
 
             {/* PRODUCTS CONTAINER */}
             <div className='flex flex-col pt-8 gap-3 w-full'>
-                <span className='tex-sm font-light'>Showing {numberProducts} products</span>
+                <span className='tex-sm font-light'>Showing {numberProductsCategory} products</span>
 
                 <div className='grid grid-cols-3 w-full gap-x-0 gap-y-10'>
-                    {products.map((product) => (
+                    {filteredProducts.map((product) => (
                         <ProductHome key={product.id_product} link={`/product/${product.id_product}`} image={AlexaImg} name_product={product.name} type={product.category} price={product.price}/>
                     ))}
                 </div>
