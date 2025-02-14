@@ -7,13 +7,13 @@ const Login:React.FC = () => {
         <form className='bg-white border border-slate-200 p-10 rounded-lg shadow flex flex-col gap-5 w-80'>
         <span className='text-2xl text-center'>Login</span>
             <div className='flex flex-col gap-1'>
-                <label htmlFor="email">Email</label>
-                <input type="email"  placeholder='Email address' className='px-5 p-2 border border-slate-300 rounded-sm font-light text-sm'/>
+                <label htmlFor="email" className='text-sm'>Email</label>
+                <input type="email"  placeholder='Email address' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
             </div>
 
             <div className='flex flex-col gap-1'>
-                <label htmlFor="email">Password</label>
-                <input type="password"  placeholder='Password' className='px-5 p-2 border border-slate-300 rounded-sm font-light text-sm'/>
+                <label htmlFor="password" className='text-sm'>Password</label>
+                <input type="password"  placeholder='Password' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
             </div>
 
             <button type="submit" className='bg-[#2B7FFF] text-white py-2 rounded hover:brightness-95 hover:transition duration-300 cursor-pointer'>Sign in</button>

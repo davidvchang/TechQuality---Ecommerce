@@ -9,6 +9,7 @@ import PaymentAccepted from "./pages/PaymentAccepted";
 import Products from "./pages/Products";
 import ProductView from "./pages/ProductView";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             
               <Route path="/" element={<Home/>}/>
               <Route path="/login" element={<Login/>}/>
+              <Route path="/register" element={<Register/>}/>
               <Route path="/products" element={<Products/>}/>
               <Route path="/product/:id_product" element={<ProductView/>}/>
               <Route path="/cart" element={<Cart/>}/>
