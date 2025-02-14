@@ -4,7 +4,7 @@ interface PropsCategories {
     name_input: string,
     id_name: string,
     name: string,
-    onChange: () => void
+    onChange?: () => void
 }
 
 const InputCategory:React.FC<PropsCategories> = ({ name_input, id_name, name, onChange }) => {

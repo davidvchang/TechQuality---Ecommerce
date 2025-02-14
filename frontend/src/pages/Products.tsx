@@ -79,7 +79,7 @@ const Products:React.FC = () => {
                     <span className='text-lg font-medium'>Categories</span>
 
                     <div className='flex flex-col gap-3'>
-                        <InputCategory name_input='categories' name='all' id_name='all' onChange={() => handleCategorySelected("all")}/>
+                        <InputCategory name_input='categories' name='All' id_name='all' onChange={() => handleCategorySelected("all")}/>
                         
                         {uniqueCategories.map((c) => (
                             <InputCategory name_input='categories' id_name={c.name} key={c.id_product} name={c.category} onChange={() => handleCategorySelected(c.category)}/>
@@ -115,7 +115,7 @@ const Products:React.FC = () => {
 
             {/* PRODUCTS CONTAINER */}
             <div className='flex flex-col pt-8 gap-3 w-full'>
-                <span className='tex-sm font-light'>Showing {numberProductsCategory} products</span>
+                <span className='tex-sm font-light'>Showing {filteredProducts.length} products</span>
 
                 <div className='grid grid-cols-3 w-full gap-x-0 gap-y-10'>
                     {filteredProducts.map((product) => (
