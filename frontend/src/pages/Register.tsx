@@ -1,6 +1,14 @@
+import axios from 'axios'
 import React from 'react'
 
 const Register:React.FC = () => {
+
+    const URL_USERS: string = import.meta.env.VITE_URL_USERS
+
+    const handleRegisterUser = async () => {
+        const res = axios.post(`${URL_USERS}/`)
+    }
+
   return (
     <section className='w-full bg-slate-50 p-10 flex flex-col items-center justify-center' style={{height: "calc(100vh - 64px)"}}>
 
