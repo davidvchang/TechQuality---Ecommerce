@@ -42,6 +42,30 @@ const Products:React.FC = () => {
         }
     }
 
+    const handleRangePrice = (id_name: string) => {
+
+        if(id_name === "all_prices") {
+            setFilteredProducts(products);
+        }
+        else if(id_name === "under_200") {
+            const filtered = products.filter((product) => Number(product.price) < 200)
+            setFilteredProducts(filtered);
+        }
+        else if(id_name === "200_500") {
+            const filtered = products.filter((product) => Number(product.price) >= 200 && Number(product.price) < 500)
+            setFilteredProducts(filtered);
+        }
+
+        else if(id_name === "500_1000") {
+            const filtered = products.filter((product) => Number(product.price) >= 500 && Number(product.price) <= 1000)
+            setFilteredProducts(filtered);
+        }
+        else if(id_name === "overr_1000"){
+            const filtered = products.filter((product) => Number(product.price) > 1000)
+            setFilteredProducts(filtered);
+        }
+    }
+
     useEffect(() => {
         getProducts()
     }, [])
@@ -91,11 +115,11 @@ const Products:React.FC = () => {
                     <span className='text-lg font-medium'>Price Range</span>
 
                     <div className='flex flex-col gap-3'>
-                            <InputCategory name_input='prices' id_name="all" name="All"/>
-                            <InputCategory name_input='prices' id_name="under_200" name="Under $200"/>
-                            <InputCategory name_input='prices' id_name="200_500" name="$200 - $500"/>
-                            <InputCategory name_input='prices' id_name="500_1000" name="$500 - $1000"/>
-                            <InputCategory name_input='prices' id_name="over_1000" name="Over $1000"/>
+                            <InputCategory name_input='prices' id_name="all_prices" name="All" onChange={() => handleRangePrice("all_prices")}/>
+                            <InputCategory name_input='prices' id_name="under_200" name="Under $200" onChange={() => handleRangePrice("under_200")}/>
+                            <InputCategory name_input='prices' id_name="200_500" name="$200 - $500" onChange={() => handleRangePrice("200_500")}/>
+                            <InputCategory name_input='prices' id_name="500_1000" name="$500 - $1000" onChange={() => handleRangePrice("500_1000")}/>
+                            <InputCategory name_input='prices' id_name="overr_1000" name="Over $1000" onChange={() => handleRangePrice("overr_1000")}/>
 
                             <div className='flex flex-col pt-3'>
                                 <div className='flex gap-16'>
