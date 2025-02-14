@@ -24,6 +24,7 @@ const Products:React.FC = () => {
     const [numberProductsCategory, setNumberProductsCategory] = useState<number>(0)
     const [minPrice, setMinPrice] = useState<string>("")
     const [maxPrice, setMaxPrice] = useState<string>("")
+    const [searchProductInput, setSearchProductInput] = useState<string>("")
 
     const getProducts= async() => {
         const response = await axios.get("http://localhost:4000/api/products")
@@ -76,6 +77,14 @@ const Products:React.FC = () => {
         }
     }
 
+    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.toLowerCase()
+        setSearchProductInput(value)
+
+        const filtered = products.filter((product) => product.name.toLowerCase().includes(value) )
+        setFilteredProducts(filtered);
+    }
+
     useEffect(() => {
         getProducts()
     }, [])
@@ -93,7 +102,7 @@ const Products:React.FC = () => {
 
         <div className='w-full flex justify-between'>
             <div className='pt-10 px-20'>
-                <InputSearch/>
+                <InputSearch onChange={handleSearchInput}/>
             </div>
 
             <div className='flex flex-col gap-3 pt-10 px-16'>
