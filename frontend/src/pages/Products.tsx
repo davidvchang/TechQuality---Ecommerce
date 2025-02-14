@@ -142,6 +142,12 @@ const Products:React.FC = () => {
                 <span className='tex-sm font-light'>Showing {filteredProducts.length} products</span>
 
                 <div className='grid grid-cols-3 w-full gap-x-0 gap-y-10'>
+                    {filteredProducts.length === 0 && (
+                        <div className='flex pt-10  '>
+                            <span className='text-3xl text-center font-light'>Products not found</span>
+                        </div>
+                    )}
+
                     {filteredProducts.map((product) => (
                         <ProductHome key={product.id_product} link={`/product/${product.id_product}`} image={AlexaImg} name_product={product.name} type={product.category} price={product.price}/>
                     ))}
