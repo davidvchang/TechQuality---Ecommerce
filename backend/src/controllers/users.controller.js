@@ -1,6 +1,16 @@
 import {pool} from '../bd.js'
 import bcrypt from 'bcryptjs';
 
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await pool.query("SELECT * FROM users")
+        res.status(200).json(users.rows)
+    } catch (ex) {
+        res.status(500).json({message: "An error has ocurred: ", ex})
+    }
+}
+
 export const registerUser = async (req, res) => {
     const {name, last_name, email, password} = req.body
     try {

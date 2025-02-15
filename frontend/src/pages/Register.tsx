@@ -55,8 +55,6 @@ const Register:React.FC = () => {
                 setDataUser(initialValues)
             })
         }
-
-
     }
 
   return (
