@@ -1,35 +1,61 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
+
+interface PropsDataUsers {
+    name: string,
+    last_name: string,
+    email: string,
+    password: string
+}
 
 const Register:React.FC = () => {
 
     const URL_USERS: string = import.meta.env.VITE_URL_USERS
 
-    const handleRegisterUser = async () => {
-        const res = axios.post(`${URL_USERS}/`)
+    const initialValues = {
+        name: "",
+        last_name: "",
+        email: "",
+        password: ""
+    }
+
+    const [dataUser, setDatauser] = useState<PropsDataUsers>(initialValues)
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setDatauser({ ...dataUser, [e.target.name]: e.target.value });
+    };
+
+
+    const handleRegisterUser = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const res = await axios.post(`${URL_USERS}/`, dataUser)
+        console.log("DADASDASD: ", res.data)
+
+
     }
 
   return (
     <section className='w-full bg-slate-50 p-10 flex flex-col items-center justify-center' style={{height: "calc(100vh - 64px)"}}>
 
-        <form className='bg-white border border-slate-200 p-10 rounded-lg shadow flex flex-col gap-5'>
+        <form className='bg-white border border-slate-200 p-10 rounded-lg shadow flex flex-col gap-5' onSubmit={handleRegisterUser}>
             <span className='text-2xl text-center'>Register</span>
 
             <div className='flex gap-3'>
                 <div className='flex flex-col gap-1'>
                     <label htmlFor="name" className='text-sm'>Name</label>
-                    <input type="text"  placeholder='Name' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
+                    <input type="text" value={dataUser.name} onChange={handleChange} name='name' placeholder='Name' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
                 </div>
 
                 <div className='flex flex-col gap-1'>
-                    <label htmlFor="lastName" className='text-sm'>Last name</label>
-                    <input type="text"  placeholder='Last name' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
+                    <label htmlFor="last_name" className='text-sm'>Last name</label>
+                    <input type="text" value={dataUser.last_name} onChange={handleChange} name='last_name' placeholder='Last name' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
                 </div>    
             </div>
 
             <div className='flex flex-col gap-1'>
                 <label htmlFor="email" className='text-sm'>Email</label>
-                <input type="email"  placeholder='Email address' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
+                <input type="email" value={dataUser.email} onChange={handleChange} name='email' placeholder='Email address' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
             </div>
 
             <div className='flex flex-col gap-1'>
@@ -39,7 +65,7 @@ const Register:React.FC = () => {
 
             <div className='flex flex-col gap-1'>
                 <label htmlFor="password" className='text-sm'>Confirm Password</label>
-                <input type="password"  placeholder='Confirm Password' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
+                <input type="password"  value={dataUser.password} onChange={handleChange} name='password' placeholder='Confirm Password' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
             </div>
 
             <button type="submit" className='bg-[#2B7FFF] text-white py-2 rounded hover:brightness-95 hover:transition duration-300 cursor-pointer'>Register</button>
