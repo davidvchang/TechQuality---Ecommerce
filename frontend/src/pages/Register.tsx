@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 interface PropsDataUsers {
@@ -12,6 +13,8 @@ interface PropsDataUsers {
 const Register:React.FC = () => {
 
     const URL_USERS: string = import.meta.env.VITE_URL_USERS
+
+    const navigate = useNavigate();
 
     const initialValues = {
         name: "",
@@ -39,6 +42,7 @@ const Register:React.FC = () => {
                 confirmButtonText: "OK"
             }).then(() => {
                 setDataUser(initialValues)
+                navigate("/login")
             })
         }
         else {
