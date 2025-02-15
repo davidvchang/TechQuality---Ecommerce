@@ -8,7 +8,8 @@ interface PropsDataUsers {
     name: string,
     last_name: string,
     email: string,
-    password: string
+    password: string,
+    password2: string,
 }
 
 const Register:React.FC = () => {
@@ -22,16 +23,24 @@ const Register:React.FC = () => {
         name: "",
         last_name: "",
         email: "",
-        password: ""
+        password: "",
+        password2: ""
     }
 
     const [dataUser, setDataUser] = useState<PropsDataUsers>(initialValues)
     const [messageExistEmail, setMessageExistEmail] = useState<boolean>(false)
+    const [samePasswords, setSamePasswords] = useState<boolean>(false)
 
     const existEmail = async () => {
         const res = await axios.get(URL_USERS + "/")
         const exist = res.data.find((i: PropsDataUsers) => i.email === dataUser.email)
         if(exist) {
+            return true
+        }
+    }
+
+    const verifyPassword = () => {
+        if(dataUser.password2 !== dataUser.password){
             return true
         }
     }
@@ -44,17 +53,27 @@ const Register:React.FC = () => {
     const handleRegisterUser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        setMessageExistEmail(false)
+        setSamePasswords(false)
+
         const emailExists = await existEmail();
+
+        const diferentPasswords = verifyPassword();
 
         if(emailExists) {
             setMessageExistEmail(true)
             return;
         }
 
+        if(diferentPasswords){
+            setSamePasswords(true)
+            return;
+        }
+
         const res = await axios.post(`${URL_USERS}/`, dataUser)
         if(res.status === 201) {
             Swal.fire({
-                title: "Correct",
+                title: "Registered",
                 text: "User has been registered correctly",
                 icon: 'success',
                 confirmButtonText: "OK"
@@ -97,20 +116,23 @@ const Register:React.FC = () => {
             <div className='flex flex-col gap-1'>
                 <label htmlFor="email" className='text-sm'>Email</label>
                 <input type="email" value={dataUser.email} onChange={handleChange} name='email' placeholder='Email address' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
-                {messageExistEmail&& (
+                {messageExistEmail && (
                     <span className='text-white text-sm px-5 py-1 bg-red-500 text-center rounded'>Email already exists</span>
                 )}
             </div>
 
             <div className='flex flex-col gap-1'>
                 <label htmlFor="password" className='text-sm'>Password</label>
-                <input type="password" placeholder='Password' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
+                <input type="password" value={dataUser.password} onChange={handleChange} name='password' placeholder='Password' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
             </div>
 
             <div className='flex flex-col gap-1'>
-                <label htmlFor="password" className='text-sm'>Confirm Password</label>
-                <input type="password"  value={dataUser.password} onChange={handleChange} name='password' placeholder='Confirm Password' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
+                <label htmlFor="password2" className='text-sm'>Confirm Password</label>
+                <input type="password"  value={dataUser.password2} onChange={handleChange} name='password2' placeholder='Confirm Password' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
             </div>
+            {samePasswords && (
+                    <span className='text-white text-sm px-5 py-1 bg-red-500 text-center rounded'>Passwords do not match</span>
+            )}
 
             <button type="submit" className='bg-[#2B7FFF] text-white py-2 rounded hover:brightness-95 hover:transition duration-300 cursor-pointer'>Register</button>
         </form>
