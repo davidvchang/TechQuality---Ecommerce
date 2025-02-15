@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 interface PropsDataUsers {
+    id_user: number | null,
     name: string,
     last_name: string,
     email: string,
@@ -17,6 +18,7 @@ const Register:React.FC = () => {
     const navigate = useNavigate();
 
     const initialValues = {
+        id_user: null,
         name: "",
         last_name: "",
         email: "",
@@ -24,6 +26,15 @@ const Register:React.FC = () => {
     }
 
     const [dataUser, setDataUser] = useState<PropsDataUsers>(initialValues)
+    const [messageExistEmail, setMessageExistEmail] = useState<boolean>(false)
+
+    const existEmail = async () => {
+        const res = await axios.get(URL_USERS + "/")
+        const exist = res.data.find((i: PropsDataUsers) => i.email === dataUser.email)
+        if(exist) {
+            return true
+        }
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDataUser({ ...dataUser, [e.target.name]: e.target.value });
@@ -32,6 +43,13 @@ const Register:React.FC = () => {
 
     const handleRegisterUser = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const emailExists = await existEmail();
+
+        if(emailExists) {
+            setMessageExistEmail(true)
+            return;
+        }
 
         const res = await axios.post(`${URL_USERS}/`, dataUser)
         if(res.status === 201) {
@@ -56,6 +74,7 @@ const Register:React.FC = () => {
             })
         }
     }
+    
 
   return (
     <section className='w-full bg-slate-50 p-10 flex flex-col items-center justify-center' style={{height: "calc(100vh - 64px)"}}>
@@ -78,6 +97,9 @@ const Register:React.FC = () => {
             <div className='flex flex-col gap-1'>
                 <label htmlFor="email" className='text-sm'>Email</label>
                 <input type="email" value={dataUser.email} onChange={handleChange} name='email' placeholder='Email address' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
+                {messageExistEmail&& (
+                    <span className='text-white text-sm px-5 py-1 bg-red-500 text-center rounded'>Email already exists</span>
+                )}
             </div>
 
             <div className='flex flex-col gap-1'>
