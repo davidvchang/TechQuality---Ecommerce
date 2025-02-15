@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import Swal from 'sweetalert2'
 
 interface PropsDataUsers {
     name: string,
@@ -19,10 +20,10 @@ const Register:React.FC = () => {
         password: ""
     }
 
-    const [dataUser, setDatauser] = useState<PropsDataUsers>(initialValues)
+    const [dataUser, setDataUser] = useState<PropsDataUsers>(initialValues)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDatauser({ ...dataUser, [e.target.name]: e.target.value });
+        setDataUser({ ...dataUser, [e.target.name]: e.target.value });
     };
 
 
@@ -30,7 +31,26 @@ const Register:React.FC = () => {
         e.preventDefault();
 
         const res = await axios.post(`${URL_USERS}/`, dataUser)
-        console.log("DADASDASD: ", res.data)
+        if(res.status === 201) {
+            Swal.fire({
+                title: "Correct",
+                text: "User has been registered correctly",
+                icon: 'success',
+                confirmButtonText: "OK"
+            }).then(() => {
+                setDataUser(initialValues)
+            })
+        }
+        else {
+            Swal.fire({
+                title: "Error",
+                text: "An error has ocurred",
+                icon: 'error',
+                confirmButtonText: "OK"
+            }).then(() => {
+                setDataUser(initialValues)
+            })
+        }
 
 
     }
