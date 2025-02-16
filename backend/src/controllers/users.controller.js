@@ -3,6 +3,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
+dotenv.config()
+
 
 export const getAllUsers = async (req, res) => {
     try {
@@ -25,7 +27,7 @@ export const registerUser = async (req, res) => {
     }
 }
 
-export const loginUser = async () => {
+export const loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     try {
