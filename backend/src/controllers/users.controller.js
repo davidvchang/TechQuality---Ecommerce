@@ -33,7 +33,7 @@ export const loginUser = async (req, res) => {
     try {
         const existUser = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         if (existUser.rows.length === 0) {
-            return res.status(404).json({ message: "Invalid email or password" });
+            return res.status(401).json({ message: "Invalid email or password" });
         }
 
         const user = existUser.rows[0];
@@ -41,7 +41,7 @@ export const loginUser = async (req, res) => {
         const validPassword = await bcrypt.compare(password, user.password);
         
         if(!validPassword) {
-            return res.status(404).json({ message: "Invalid email or password" });
+            return res.status(401).json({ message: "Invalid email or password" });
         }
 
         const token = jwt.sign(
