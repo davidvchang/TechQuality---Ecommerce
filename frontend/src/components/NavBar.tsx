@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { User, ShoppingCart } from 'lucide-react';
 import Nav from './Nav';
+import axios from 'axios';
 
 interface PropsNavBar {
   numberCart?: number
@@ -8,6 +9,26 @@ interface PropsNavBar {
 
 const NavBar:React.FC<PropsNavBar> = ({numberCart}) => {
 
+  const URL_USERS: string = import.meta.env.VITE_URL_USERS
+
+  const token = localStorage.getItem('token');
+
+  const [emailUser, setEmailUser] = useState<string>("")
+
+  const getEmailAuthenticated = async () => {
+    const res = await axios.get(`${URL_USERS}/autenticatedUser`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+
+      },
+    })
+    setEmailUser(res.data.email)
+  }
+
+  useEffect(() => {
+    getEmailAuthenticated()
+  }, [])
+  
   
   const logout = () => {
     localStorage.removeItem("token");
@@ -29,7 +50,7 @@ const NavBar:React.FC<PropsNavBar> = ({numberCart}) => {
             <a href='/login' className='relative w-8 h-8 hover:text-blue-500 hover:transition duration-300 hover:cursor-pointer'><User/></a>
             {localStorage.getItem('token') !== null && (
               <div className='flex flex-col absolute top-12 right-22 bg-white p-2 gap-5 shadow border border-slate-100 rounded'>
-                <span className='text-slate-600 font-light text-sm'>dvalenzuelachagn@gmail.com</span>
+                <span className='text-slate-600 font-light text-sm'>{emailUser}</span>
                 <button className='text-sm bg-red-500 py-2 text-white rounded hover:brightness-95 hover:transition duration-300 cursor-pointer' onClick={logout}>Logout</button>
               </div>
 
