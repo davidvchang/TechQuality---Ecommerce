@@ -10,6 +10,7 @@ import Products from "./pages/Products";
 import ProductView from "./pages/ProductView";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Favorites from "./pages/Favorites";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
               <Route path="/products" element={<Products/>}/>
               <Route path="/product/:id_product" element={<ProductView/>}/>
               <Route path="/cart" element={<Cart/>}/>
+              <Route path="/favorites" element={<Favorites/>}/>
               <Route path="/checkout" element={<Checkout/>}/>
               <Route path="/order-review" element={<Review/>}/>
               <Route path="/payment-accepted" element={<PaymentAccepted/>}/>
