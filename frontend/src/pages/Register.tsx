@@ -84,12 +84,10 @@ const Register:React.FC = () => {
         }
         else {
             Swal.fire({
-                title: "Error",
-                text: "An error has ocurred",
-                icon: 'error',
+                title: "Successfully Added",
+                text: "The product has been added correctly",
+                icon: 'success',
                 confirmButtonText: "OK"
-            }).then(() => {
-                setDataUser(initialValues)
             })
         }
     }

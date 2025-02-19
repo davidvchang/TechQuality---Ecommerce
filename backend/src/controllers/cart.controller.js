@@ -3,6 +3,7 @@ import { pool } from '../bd.js'
 export const addToCart = async (req, res) => {
     const { product_id, quantity } = req.body;
     const user_id = req.user.id;
+    console.log("ADSADASDAD", req.user)
 
     try {
         const productExist = await pool.query("SELECT * FROM products WHERE id_product = $1", [product_id]);

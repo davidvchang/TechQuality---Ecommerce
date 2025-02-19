@@ -16,6 +16,8 @@ interface PropsDataCategories {
 
 const Products:React.FC = () => {
 
+    const URL_PRODUCTS = import.meta.env.VITE_URL_PRODUCTS
+
     const [products, setProducts] = useState<PropsDataCategories[]>([])
     const [categories, setCategories] = useState<PropsDataCategories[]>([])
     const [numberProducts, setNumberProducts] = useState<number>(0)
@@ -27,7 +29,7 @@ const Products:React.FC = () => {
     const [searchProductInput, setSearchProductInput] = useState<string>("")
 
     const getProducts= async() => {
-        const response = await axios.get("http://localhost:4000/api/products")
+        const response = await axios.get(URL_PRODUCTS)
         setCategories(response.data)
         setNumberProducts(response.data.length)
         setProducts(response.data)

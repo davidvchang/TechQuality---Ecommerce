@@ -3,6 +3,7 @@ import { ArrowLeft, Minus, Plus, ShoppingCart, Heart } from 'lucide-react';
 import ImagesProductContainer from '../components/ImagesProductContainer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 interface PropsDataProduct {
     id_product: number,
@@ -13,14 +14,17 @@ interface PropsDataProduct {
 }
 
 const ProductView:React.FC = () => {
+
+    const URL_ADD_TO_CART = import.meta.env.VITE_URL_ADD_TO_CART
+    const URL_PRODUCTS = import.meta.env.VITE_URL_PRODUCTS
+
     const { id_product } = useParams();
 
     const [products, setProducts] = useState<PropsDataProduct[]>([])
     const [counterQuantity, setCounterQuantity] = useState<number>(1)
 
     const getProduct= async() => {
-        const response = await axios.get(`http://localhost:4000/api/products/${id_product}`)
-        console.log("DATOOOOOS: ", response.data)
+        const response = await axios.get(`${URL_PRODUCTS}/${id_product}`)
         setProducts(response.data)
     }
 
@@ -28,6 +32,35 @@ const ProductView:React.FC = () => {
         if(counterQuantity > 1) {
             setCounterQuantity(counterQuantity - 1)
         }
+    }
+
+    const addToCart = async (id_product: number, quantity: number) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            Swal.fire({
+                title: "Error",
+                text: "You must login first",
+                icon: 'error',
+                confirmButtonText: "OK"
+            })
+            return;
+        }
+
+        await axios.post(
+            URL_ADD_TO_CART, 
+            { product_id: id_product, quantity },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+        Swal.fire({
+            title: "Product Added",
+            text: "The product has been added correctly",
+            icon: 'success',
+            confirmButtonText: "OK"
+        })
     }
 
     useEffect(() => {
@@ -79,7 +112,7 @@ const ProductView:React.FC = () => {
 
                     <div className='flex flex-col gap-14 pt-5'>
                         <div className='flex gap-5'>
-                            <button className='bg-[#101827] text-white flex py-3 px-48 gap-3 items-center hover:bg-slate-800 cursor-pointer hover:transition duration-300'>
+                            <button className='bg-[#101827] text-white flex py-3 px-48 gap-3 items-center hover:bg-slate-800 cursor-pointer hover:transition duration-300' onClick={() => addToCart(product.id_product, counterQuantity)}>
                                 <ShoppingCart className='w-5 h-5'/>
                                 <span className='font-normal'>Add to Cart</span>
                             </button>

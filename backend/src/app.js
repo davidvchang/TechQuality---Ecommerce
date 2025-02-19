@@ -3,6 +3,7 @@ import cors from 'cors'
 import morgan from 'morgan'
 import productsRoutes from './routes/products.routes.js'
 import usersRoutes from './routes/users.routes.js'
+import cartRoutes from './routes/cart.routes.js'
 
 const app = express()
 
