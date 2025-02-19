@@ -26,8 +26,10 @@ const NavBar:React.FC<PropsNavBar> = ({numberCart}) => {
   }
 
   useEffect(() => {
-    getEmailAuthenticated()
-  }, [])
+    if (token) {
+      getEmailAuthenticated();
+    }
+  }, [token])
   
   
   const logout = () => {
