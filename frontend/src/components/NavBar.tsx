@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { User, ShoppingCart } from 'lucide-react';
+import { User, ShoppingCart, Heart } from 'lucide-react';
 import Nav from './Nav';
 import axios from 'axios';
 
@@ -57,6 +57,11 @@ const NavBar:React.FC<PropsNavBar> = ({numberCart}) => {
               </div>
 
             )}
+            
+            <div className='flex'>
+              <a href='/favorites' className='w-7 h-8 hover:text-blue-500 hover:transition duration-300 hover:cursor-pointer'><Heart/></a>
+            </div>
+            
             <div className='flex'>
               <a href='/cart' className='w-7 h-8 hover:text-blue-500 hover:transition duration-300 hover:cursor-pointer'><ShoppingCart/></a>
               <div className=' bg-blue-500 px-1 py-0 w-fit h-fit rounded-full flex items-center select-none'>
