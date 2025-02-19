@@ -39,7 +39,7 @@ const Login:React.FC = () => {
             </div>
 
             {errorMessage && (
-              <span className='bg-red-500 tex-white'>Credentials invalid</span>
+              <span className='bg-red-500 text-white text-center text-sm py-2'>Invalid Credentials</span>
             )}
 
             <button type="submit" className='bg-[#2B7FFF] text-white py-2 rounded hover:brightness-95 hover:transition duration-300 cursor-pointer'>Sign in</button>
