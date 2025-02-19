@@ -59,9 +59,9 @@ const NavBar:React.FC<PropsNavBar> = ({numberCart}) => {
             )}
             
             <div className='flex'>
-              <a href='/favorites' className='w-7 h-8 hover:text-blue-500 hover:transition duration-300 hover:cursor-pointer'><Heart/></a>
+              <a href='/favorites' className='w-7 h-8 hover:text-blue-500 hover:transition duration-300 hover:cursor-pointer'><Heart className='' strokeWidth={1.8}/></a>
             </div>
-            
+
             <div className='flex'>
               <a href='/cart' className='w-7 h-8 hover:text-blue-500 hover:transition duration-300 hover:cursor-pointer'><ShoppingCart/></a>
               <div className=' bg-blue-500 px-1 py-0 w-fit h-fit rounded-full flex items-center select-none'>

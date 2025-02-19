@@ -14,5 +14,6 @@ app.use(express.json())
 
 app.use("/api/products", productsRoutes)
 app.use("/api/users", usersRoutes)
+app.use("/api/cart", cartRoutes);
 
 export default app
