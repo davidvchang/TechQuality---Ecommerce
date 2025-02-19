@@ -7,16 +7,21 @@ const Login:React.FC = () => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
+  
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await axios.post(`${URL_USERS}/login`, {
-      email,
-      password,
-    });
-    localStorage.setItem('token', response.data.token);
-    // navigate('/');
-    window.location.href = "/";
+    try {
+      const response = await axios.post(`${URL_USERS}/login`, {
+        email,
+        password,
+      });
+      localStorage.setItem('token', response.data.token);
+      window.location.href = "/";
+    } catch {
+      setErrorMessage(true);
+    }
   };
   return (
     <section className='w-full bg-slate-50 p-10 flex flex-col items-center justify-center' style={{height: "calc(100vh - 64px)"}}>
@@ -32,6 +37,10 @@ const Login:React.FC = () => {
                 <label htmlFor="password" className='text-sm'>Password</label>
                 <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' className='px-3 p-2 border border-slate-300 rounded-sm font-light text-sm' required/>
             </div>
+
+            {errorMessage && (
+              <span className='bg-red-500 tex-white'>Credentials invalid</span>
+            )}
 
             <button type="submit" className='bg-[#2B7FFF] text-white py-2 rounded hover:brightness-95 hover:transition duration-300 cursor-pointer'>Sign in</button>
 
