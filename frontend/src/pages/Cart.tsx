@@ -96,6 +96,12 @@ const Cart:React.FC = () => {
         await getProducts()
    }
 
+   const getSubtotal = () => {
+    return dataProductsUser.reduce((total, product) => {
+        return total + (Number(product.price) * product.quantity);
+    }, 0);
+}
+
     const getProducts = async () => {
         const [response1, response2] = await Promise.all([
             axios.get(`${URL_GET_PRODUCTS}/`),
@@ -166,7 +172,7 @@ const Cart:React.FC = () => {
                         </div>
 
                         <div className='flex flex-col items-end min-h-full justify-between'>
-                            <span>${Number(product.price) * product.quantity}</span>
+                            <span>${(Number(product.price) * product.quantity).toFixed(2)}</span>
                             <button className='w-fit p-2 rounded cursor-pointer hover:text-red-500 hover:bg-red-100 hover:transition duration-300' onClick={() => handledeleteProduct(product.id_product)}><Trash2 className='w-5 h-5'/></button>
 
                         </div>
@@ -183,7 +189,7 @@ const Cart:React.FC = () => {
                 <div className='flex flex-col gap-2 pb-5 border-b border-b-slate-200'>
                     <div className='w-full flex justify-between items-center'>
                         <span className='text-sm text-slate-500'>Subtotal</span>
-                        <span className='text-sm'>$799.99</span>
+                        <span className='text-sm'>${getSubtotal().toFixed(2)}</span>
                     </div>
                     <div className='w-full flex justify-between items-center'>
                         <span className='text-sm text-slate-500'>Shipping</span>
@@ -194,7 +200,7 @@ const Cart:React.FC = () => {
 
                 <div className='flex w-full justify-between items-center'>
                     <span className='font-medium text-lg'>Total</span>
-                    <span className='font-medium text-lg'>$799.99</span>
+                    <span className='font-medium text-lg'>${getSubtotal().toFixed(2)}</span>
                 </div>
 
                 <a href="/checkout" className='w-full py-4 bg-blue-600 text-white font-medium flex justify-center hover:bg-blue-500 hover:transition duration-300'>Proceed to Checkout</a>
