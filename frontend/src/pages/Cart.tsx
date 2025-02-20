@@ -28,15 +28,13 @@ const Cart:React.FC = () => {
 
     const URL_GET_PRODUCTS_IN_CART = import.meta.env.VITE_URL_GET_CART_ITEMS
     const URL_GET_PRODUCTS = import.meta.env.VITE_URL_PRODUCTS
-
-    const [numberQuantity, setNumberQuantity] = useState<number>(1)
     const [dataProductsUser, setDataProductsUser] = useState<PropsDataProducts[]>([])
 
     const restQuantity = (productId: number) => {
         setDataProductsUser((prevProducts) => 
             prevProducts.map((product) => 
                 product.id_product === productId 
-                    ? { ...product, quantity: (product.quantity - 1)}
+                    ? { ...product, quantity: Math.max(1, product.quantity - 1)}
                     : product
             )
         );
