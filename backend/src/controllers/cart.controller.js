@@ -27,8 +27,20 @@ export const getCart = async (req, res) => {
     const user_id = req.user.id;
 
     try {
-        const cart =await pool.query("SELECT * FROM cart_items WHERE user_id = $1", [user_id])
+        const cart = await pool.query("SELECT * FROM cart_items WHERE user_id = $1", [user_id])
         return res.status(200).json(cart.rows)
+    } catch (ex) {
+        res.status(500).json({ message: "Error occurred: " + ex });
+    }
+}
+
+export const deleteProductInCart = async (req, res) => {
+    const {id_product} = req.params
+    const user_id = req.user.id;
+
+    try {
+        await pool.query("DELETE FROM cart_items WHERE user_id = $1 AND product_id = $2", [user_id, id_product])
+        res.status(204).json("Product has been deleted successful")
     } catch (ex) {
         res.status(500).json({ message: "Error occurred: " + ex });
     }
