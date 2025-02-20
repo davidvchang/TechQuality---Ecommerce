@@ -3,7 +3,6 @@ import { pool } from '../bd.js'
 export const addToCart = async (req, res) => {
     const { product_id, quantity } = req.body;
     const user_id = req.user.id;
-    console.log("ADSADASDAD", req.user)
 
     try {
         const productExist = await pool.query("SELECT * FROM products WHERE id_product = $1", [product_id]);
@@ -19,6 +18,17 @@ export const addToCart = async (req, res) => {
             await pool.query("INSERT INTO cart_items (user_id, product_id, quantity) VALUES ($1, $2, $3)", [user_id, product_id, quantity]);
             return res.status(201).json({ message: "Product added to cart" });
         }
+    } catch (ex) {
+        res.status(500).json({ message: "Error occurred: " + ex });
+    }
+}
+
+export const getCart = async (req, res) => {
+    const user_id = req.user.id;
+
+    try {
+        const cart =await pool.query("SELECT * FROM cart_items WHERE user_id = $1", [user_id])
+        return res.status(200).json(cart.rows)
     } catch (ex) {
         res.status(500).json({ message: "Error occurred: " + ex });
     }
