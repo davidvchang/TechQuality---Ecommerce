@@ -11,13 +11,18 @@ import ProductView from "./pages/ProductView";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Favorites from "./pages/Favorites";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
+
+  
+  
 
   return (
     <main>
 
-      <NavBar numberCart={2}/>
+      <NavBar/>
       <div className="pt-16">
 
         <BrowserRouter>

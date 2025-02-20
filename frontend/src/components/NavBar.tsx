@@ -10,10 +10,16 @@ interface PropsNavBar {
 const NavBar:React.FC<PropsNavBar> = ({numberCart}) => {
 
   const URL_USERS: string = import.meta.env.VITE_URL_USERS
+  const URL_GET_PRODUCTS_IN_CART = import.meta.env.VITE_URL_GET_CART_ITEMS
 
   const token = localStorage.getItem('token');
 
   const [emailUser, setEmailUser] = useState<string>("")
+  const [numberProductsCart, setNumberProductsCart] = useState<number>(0)
+
+  useEffect(() => {
+    getNumberProductsInCart()
+  }, [numberProductsCart])
 
   const getEmailAuthenticated = async () => {
     const res = await axios.get(`${URL_USERS}/autenticatedUser`, {
@@ -30,6 +36,21 @@ const NavBar:React.FC<PropsNavBar> = ({numberCart}) => {
       getEmailAuthenticated();
     }
   }, [token])
+
+  const getNumberProductsInCart = async () => {
+    const res = await axios.get(`${URL_GET_PRODUCTS_IN_CART}/`, 
+      {
+          headers: {
+              Authorization: `Bearer ${token}`,
+          },
+      }
+    )
+    setNumberProductsCart(res.data.length)
+  }
+
+  useEffect(() => {
+    getNumberProductsInCart()
+  }, [numberProductsCart])
   
   
   const logout = () => {
@@ -64,9 +85,12 @@ const NavBar:React.FC<PropsNavBar> = ({numberCart}) => {
 
             <div className='flex'>
               <a href='/cart' className='w-7 h-8 hover:text-blue-500 hover:transition duration-300 hover:cursor-pointer'><ShoppingCart/></a>
-              <div className=' bg-blue-500 px-1 py-0 w-fit h-fit rounded-full flex items-center select-none'>
-                <span className='text-xs font-bold text-white'>{numberCart}</span>
-              </div>
+              {numberProductsCart !== 0 && (
+                <div className=' bg-blue-500 px-1 py-0 w-fit h-fit rounded-full flex items-center select-none'>
+                  <span className='text-xs font-bold text-white'>{numberProductsCart}</span>
+                </div>
+
+              )}
 
             </div>
         </div>
