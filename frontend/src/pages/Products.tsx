@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import InputSearch from '../components/InputSearch'
 import InputCategory from '../components/InputCategory'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import ProductHome from '../components/Product'
 import AlexaImg from '../assets/img/Alexa.webp'
 import { Search } from 'lucide-react';
@@ -17,6 +18,7 @@ interface PropsDataCategories {
 const Products:React.FC = () => {
 
     const URL_PRODUCTS = import.meta.env.VITE_URL_PRODUCTS
+    const URL_ADD_TO_CART = import.meta.env.VITE_URL_ADD_TO_CART
 
     const [products, setProducts] = useState<PropsDataCategories[]>([])
     const [categories, setCategories] = useState<PropsDataCategories[]>([])
@@ -85,6 +87,35 @@ const Products:React.FC = () => {
 
         const filtered = products.filter((product) => product.name.toLowerCase().includes(value) )
         setFilteredProducts(filtered);
+    }
+
+    const handleAddToCart = async (id_product: number, quantity: number) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            Swal.fire({
+                title: "Error",
+                text: "You must login first",
+                icon: 'error',
+                confirmButtonText: "OK"
+            })
+            return;
+        }
+
+        await axios.post(
+            URL_ADD_TO_CART, 
+            { product_id: id_product, quantity },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+        Swal.fire({
+            title: "Product Added",
+            text: "The product has been added correctly",
+            icon: 'success',
+            confirmButtonText: "OK"
+        })
     }
 
     useEffect(() => {
@@ -171,7 +202,7 @@ const Products:React.FC = () => {
                     )}
 
                     {filteredProducts.map((product) => (
-                        <ProductHome key={product.id_product} link={`/product/${product.id_product}`} image={AlexaImg} name_product={product.name} type={product.category} price={product.price}/>
+                        <ProductHome key={product.id_product} link={`/product/${product.id_product}`} image={AlexaImg} name_product={product.name} type={product.category} price={product.price} onClickCart={() => handleAddToCart(product.id_product, 1)}/>
                     ))}
                 </div>
             </div>

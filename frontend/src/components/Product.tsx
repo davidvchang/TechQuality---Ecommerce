@@ -7,9 +7,10 @@ interface PropsProductsHome {
     type: string,
     price: string,
     link: string
+    onClickCart: () => void
 }
 
-const ProductHome:React.FC<PropsProductsHome> = ({ image, name_product, type, price, link}) => {
+const ProductHome:React.FC<PropsProductsHome> = ({ image, name_product, type, price, link, onClickCart}) => {
   return (
     <div className='flex-1 flex-col'>
         <div className='min-w-72 w-72 h-72 relative overflow-hidden'>
@@ -22,7 +23,7 @@ const ProductHome:React.FC<PropsProductsHome> = ({ image, name_product, type, pr
                     <Heart className='w-5 h-5'/>
                 </button>
 
-                <button className=' p-2 bg-white rounded-full shadow-2xl opacity-95 hover:brightness-95 hover:transition hover:cursor-pointer duration-300'>
+                <button className=' p-2 bg-white rounded-full shadow-2xl opacity-95 hover:brightness-95 hover:transition hover:cursor-pointer duration-300' onClick={onClickCart}>
                     <ShoppingCart className='w-5 h-5'/>
                 </button>
 
