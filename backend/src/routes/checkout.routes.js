@@ -6,3 +6,6 @@ const router = Router();
 
 router.get("/", verifyToken, getCheckout)
 router.post("/", verifyToken, postCheckout)
+
+
+export default router

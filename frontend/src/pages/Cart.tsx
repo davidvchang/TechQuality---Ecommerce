@@ -28,6 +28,7 @@ const Cart:React.FC = () => {
 
     const URL_GET_PRODUCTS_IN_CART = import.meta.env.VITE_URL_GET_CART_ITEMS
     const URL_GET_PRODUCTS = import.meta.env.VITE_URL_PRODUCTS
+    const URL_CHECKOUT = import.meta.env.VITE_URL_CHECKOUT
 
     const [dataProductsUser, setDataProductsUser] = useState<PropsDataProducts[]>([])
 
@@ -66,6 +67,46 @@ const Cart:React.FC = () => {
             })
         );
     };
+
+    const handleSaveInfoCart = async () => {
+        const total_price:number = Number(getSubtotal().toFixed(2))
+
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            Swal.fire({
+                title: "Error",
+                text: "You must login first",
+                icon: 'error',
+                confirmButtonText: "OK"
+            })
+            return;
+        }
+
+        await axios.post(`${URL_CHECKOUT}/`,
+            {
+                total_price,
+                products: dataProductsUser.map(product => ({
+                    product_id: product.id_product,
+                    quantity: product.quantity,
+                    price: product.price
+                }))
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        )
+
+        Swal.fire({
+            title: "Éxito",
+            text: "Tu pedido ha sido creado correctamente.",
+            icon: "success",
+            confirmButtonText: "OK",
+        });
+
+    }
 
     const sumQuantity = (productId: number) => {
         setDataProductsUser((prevProducts) => 
@@ -203,7 +244,7 @@ const Cart:React.FC = () => {
                     <span className='font-medium text-lg'>${getSubtotal().toFixed(2)}</span>
                 </div>
 
-                <a href="/checkout" className='w-full py-4 bg-blue-600 text-white font-medium flex justify-center hover:bg-blue-500 hover:transition duration-300'>Proceed to Checkout</a>
+                <button onClick={handleSaveInfoCart} className='w-full py-4 bg-blue-600 text-white font-medium flex justify-center hover:bg-blue-500 hover:transition duration-300'>Proceed to Checkout</button>
 
             </div>
 
