@@ -1,7 +1,8 @@
 import { pool } from '../bd.js'
 
 export const postCheckout = async () => {
-    const { user_id, cart } = req.body
+    const { cart } = req.body
+    const user_id = req.user.id;
 
     try {
         if(!cart || cart.length === 0) {
