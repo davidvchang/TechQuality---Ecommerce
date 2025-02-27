@@ -104,7 +104,10 @@ const Cart:React.FC = () => {
             text: "Tu pedido ha sido creado correctamente.",
             icon: "success",
             confirmButtonText: "OK",
-        });
+        }).then(() => {
+            window.location.href = "/checkout";
+        })
+
 
     }
 

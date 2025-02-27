@@ -30,18 +30,22 @@ export const postCheckout = async (req, res) => {
 }
 
 export const getCheckout = async (req, res) => {
-    const { order_id } = req.params;
+    const user_id = req.user.id;
 
     try {
-        const orderRes = await pool.query('SELECT id_order, user_id, total_price, status FROM orders WHERE id_order = $1',[order_id]);
+        const orderRes = await pool.query('SELECT id_order, user_id, total_price, status FROM orders WHERE user_id = $1 AND status = $2 ORDER BY id_order DESC LIMIT 1',[user_id, 'pending']);
 
         if (orderRes.rows.length === 0) {
             return res.status(404).json({ message: "Order not found" });
         }
 
-        res.json(orderRes.rows[0]);
-
-        const productsRes = await pool.query('SELECT product_id, quantity, price FROM order_products WHERE order_id = $1',[order_id]);
+        const productsRes = await pool.query(
+            'SELECT p.id_product, p.name, p.price, op.quantity ' +
+            'FROM order_products op ' +
+            'JOIN products p ON op.product_id = p.id_product ' +
+            'WHERE op.order_id = $1',
+            [orderRes.rows[0].id_order]
+        );
         res.status(200).json(productsRes.rows)
 
     } catch (ex) {
