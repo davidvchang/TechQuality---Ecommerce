@@ -3,7 +3,7 @@ import NavBar from "./components/NavBar";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Home from "./pages/Home"
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import Review from "./pages/Review";
 import PaymentAccepted from "./pages/PaymentAccepted";
 import Products from "./pages/Products";
@@ -15,9 +15,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function App() {
-
-  
-  
+  const isAuthenticated = localStorage.getItem('token');
 
   return (
     <main>
@@ -34,10 +32,10 @@ function App() {
               <Route path="/products" element={<Products/>}/>
               <Route path="/product/:id_product" element={<ProductView/>}/>
               <Route path="/cart" element={<Cart/>}/>
-              <Route path="/favorites" element={<Favorites/>}/>
-              <Route path="/checkout" element={<Checkout/>}/>
-              <Route path="/order-review" element={<Review/>}/>
-              <Route path="/payment-accepted" element={<PaymentAccepted/>}/>
+              <Route path="/favorites" element={isAuthenticated ? <Favorites/> : <Navigate to="/login"/>}/>
+              <Route path="/checkout" element={isAuthenticated ? <Checkout/> : <Navigate to="/login"/>}/>
+              <Route path="/order-review" element={isAuthenticated ? <Review/> : <Navigate to="/login"/>}/>
+              <Route path="/payment-accepted" element={isAuthenticated ? <PaymentAccepted/> : <Navigate to="/login"/>}/>
           </Routes>
         </BrowserRouter>
       </div>
