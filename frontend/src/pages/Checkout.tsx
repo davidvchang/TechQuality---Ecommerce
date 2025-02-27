@@ -5,6 +5,8 @@ const Checkout:React.FC = () => {
 
     const [methodPayment, setMethodPayment] = useState<string>("")
 
+    
+
   return (
     <section className='flex flex-col p-10 gap-5 bg-slate-50'>
         <span className='text-2xl'>Checkout</span>
